@@ -6,8 +6,8 @@ Our objective in this project to implement statistical methods like KNN & Bayes 
 ### Dependencies
 Libraries : tensorflow, numpy, sklearn , matplotlib
 ## Authors
-Laasya Nellore : laasyanellore@arizona.edu
-Tanisha Lohchab : tanishal@arizona.edu
+* Laasya Nellore : laasyanellore@arizona.edu
+* Tanisha Lohchab : tanishal@arizona.edu
 ## License
 This project is licensed under the MIT License - see the LICENSE.md file for details
 ## Acknowledgement
