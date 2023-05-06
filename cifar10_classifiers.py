@@ -144,6 +144,44 @@ print("Accuracy:", accuracy)
 # Classification report
 print(classification_report(Y_test, y_pred1))
 
+# generate the confusion matrix
+cm = confusion_matrix(Y_test, y_pred1)
+
+# print('Confusion matrix\n\n', cm)
+
+print('\nTrue Positives(TP) = ', cm[0,0])
+
+print('\nTrue Negatives(TN) = ', cm[1,1])
+
+print('\nFalse Positives(FP) = ', cm[0,1])
+
+print('\nFalse Negatives(FN) = ', cm[1,0])
+
+# Define the labels for the heatmap
+labels = ['True Negatives', 'False Positives', 'False Negatives', 'True Positives']
+
+# Define the values for the heatmap
+tp = cm[0][0]
+tn = cm[1][1]
+fp = cm[0][1]
+fn = cm[1][0]
+
+# Define the color scheme for the heatmap
+cmap = plt.cm.Blues
+
+# Create the heatmap using the values and labels
+plt.imshow([[tn, fp], [fn, tp]], interpolation='nearest', cmap=cmap)
+plt.xticks(np.arange(2), ['Negative', 'Positive'])
+plt.yticks(np.arange(2), ['Negative', 'Positive'])
+plt.colorbar()
+
+# Add the labels to the heatmap
+for i in range(2):
+    for j in range(2):
+        plt.text(j, i, str(cm[i][j]), ha='center', va='center', color='black', fontsize=14)
+plt.title('Heatmap for Bayes')
+plt.show()
+
 # Gaussian Naive Bayes (GNB) classifier
 
 We can also try to create and fit a gaussian Naive Bias. Similar to the Above bayesian classifier it uses the Bayes theorm, the only difference is that it assumes that the features are conditionally independent. 
@@ -162,6 +200,44 @@ print("Accuracy:", accuracy)
 
 # Classification report
 print(classification_report(Y_test, y_pred))
+
+# generate the confusion matrix
+cm = confusion_matrix(Y_test, y_pred_gnb)
+
+# print('Confusion matrix\n\n', cm)
+
+print('\nTrue Positives(TP) = ', cm[0,0])
+
+print('\nTrue Negatives(TN) = ', cm[1,1])
+
+print('\nFalse Positives(FP) = ', cm[0,1])
+
+print('\nFalse Negatives(FN) = ', cm[1,0])
+
+# Define the labels for the heatmap
+labels = ['True Negatives', 'False Positives', 'False Negatives', 'True Positives']
+
+# Define the values for the heatmap
+tp = cm[0][0]
+tn = cm[1][1]
+fp = cm[0][1]
+fn = cm[1][0]
+
+# Define the color scheme for the heatmap
+cmap = plt.cm.Blues
+
+# Create the heatmap using the values and labels
+plt.imshow([[tn, fp], [fn, tp]], interpolation='nearest', cmap=cmap)
+plt.xticks(np.arange(2), ['Negative', 'Positive'])
+plt.yticks(np.arange(2), ['Negative', 'Positive'])
+plt.colorbar()
+
+# Add the labels to the heatmap
+for i in range(2):
+    for j in range(2):
+        plt.text(j, i, str(cm[i][j]), ha='center', va='center', color='black', fontsize=14)
+plt.title('Heatmap for GNB')
+plt.show()
 
 We saw that the accuarcy increases to 35.45% when instead of Parzen's method we used Naive Bias Classifier.
 
@@ -186,17 +262,15 @@ Now evaluating the performance of the KNN
 #Evaluate the classifier
 y_pred2 = knn.predict(x_test)
 accuracy = accuracy_score(Y_test, y_pred2)
-print("Accuracy:", accuracy)
+print("Accuracy for KNN:", accuracy)
 
 #Classification report
-print(classification_report(Y_test, y_pred2))
+print("Classification Report for KNN: \n", classification_report(Y_test, y_pred2))
 
 To improve the classification accuracy of the model we will try using the train test that has been passed thorugh PCA.
 
 #to increase the classification accuracy we will fit the data with that was passed through principal component analysis.
 knn.fit(x_train_pca, Y_train)
-
-
 
 # Evaluate the classifier
 y_pred_knn1 = knn.predict(x_test_pca)
@@ -204,7 +278,45 @@ accuracy_knn = accuracy_score(Y_test, y_pred_knn1)
 print("Accuracy for KNN:", accuracy_knn)
 
 # Classification report
-print("Classification Report:", classification_report(Y_test, y_pred_knn1))
+print("Classification Report for KNN:\n", classification_report(Y_test, y_pred_knn1))
+
+# generate the confusion matrix
+cm = confusion_matrix(Y_test, y_pred_knn)
+
+# print('Confusion matrix\n\n', cm)
+
+print('\nTrue Positives(TP) = ', cm[0,0])
+
+print('\nTrue Negatives(TN) = ', cm[1,1])
+
+print('\nFalse Positives(FP) = ', cm[0,1])
+
+print('\nFalse Negatives(FN) = ', cm[1,0])
+
+# Define the labels for the heatmap
+labels = ['True Negatives', 'False Positives', 'False Negatives', 'True Positives']
+
+# Define the values for the heatmap
+tp = cm[0][0]
+tn = cm[1][1]
+fp = cm[0][1]
+fn = cm[1][0]
+
+# Define the color scheme for the heatmap
+cmap = plt.cm.Blues
+
+# Create the heatmap using the values and labels
+plt.imshow([[tn, fp], [fn, tp]], interpolation='nearest', cmap=cmap)
+plt.xticks(np.arange(2), ['Negative', 'Positive'])
+plt.yticks(np.arange(2), ['Negative', 'Positive'])
+plt.colorbar()
+
+# Add the labels to the heatmap
+for i in range(2):
+    for j in range(2):
+        plt.text(j, i, str(cm[i][j]), ha='center', va='center', color='black', fontsize=14)
+plt.title('Heatmap for KNN')
+plt.show()
 
 # Convolutional Neural Networks (CNNs)
 Next approach we tried is the Convolutional Neural Network (CNN). It is highly effective for image classification tasks. We have already preprocessed the data now we design a CNN architecture, which consists of multiple convolutional layers, pooling layers and fully connected layers as well as dropout and normalization layers.
@@ -307,6 +419,20 @@ print(f"Average Training Accuracy: {average_train_accuracy * 100:.2f}%")
 print(f"Average Validation Accuracy: {average_val_accuracy * 100:.2f}%")
 print(f"Test Accuracy: {test_accuracy * 100:.2f}%")
 
+Let us now print the confusion matrix for this too.
+y_pred = model.predict(X_test)
+y_pred_classes = np.argmax(y_pred, axis=1)
+
+# Generate the confusion matrix
+confusion_mtx = confusion_matrix(Y_test, y_pred_classes)
+
+# Plot the confusion matrix as a heatmap
+plt.figure(figsize=(10,8))
+sns.heatmap(confusion_mtx, annot=True, fmt='d', cmap='Blues')
+plt.xlabel('Predicted Label')
+plt.ylabel('True Label')
+plt.show()
+
 To show the use of the trained model to make predictions on individual images from the test dataset and compare the results to the ground truth labels we will predict the class label of a single image from the CIFAR-10 test dataset and compare it to the original label.
 
 # label mapping
@@ -339,3 +465,5 @@ print("Original label is {} and predicted label is {}".format(
 
 # save the model
 model.save('CIFAR10.Classification.h5')
+
+We will compare the details of different models in the report.
